@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AmmaCare Admin</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23A8432A' d='M16 29c0-9 3-17 12-24-2 12-6 20-12 24Zm0 0C16 21 12 14 4 9c1 10 5 17 12 20Z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#dashboard" class="brand">
+    <svg class="brand-leaf" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29c0-9 3-17 12-24-2 12-6 20-12 24Zm0 0C16 21 12 14 4 9c1 10 5 17 12 20Z"/></svg>
+    AmmaCare <span class="admin-tag">Admin</span>
+  </a>
+  <div class="account" id="accountArea"></div>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="admin-shell">
+  <aside class="admin-sidebar" id="siteNav">
+    <nav class="admin-nav">
+      <a href="#dashboard" data-page="dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+        Dashboard
+      </a>
+      <a href="#articles" data-page="articles">
+        <svg viewBox="0 0 24 24"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4Z"/><path d="M20 4h-4a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h5Z"/></svg>
+        Articles
+      </a>
+      <a href="#community" data-page="community">
+        <svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4Z"/></svg>
+        Community
+      </a>
+      <a href="#users" data-page="users">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M17 11a3 3 0 1 0 0-6"/><path d="M22 21c0-3-2-5-5-5"/></svg>
+        Users
+      </a>
+      <a href="#places" data-page="places">
+        <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Places
+      </a>
+      <a href="#export" data-page="export">
+        <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+        Export
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <a href="#" id="viewSiteLink" target="_blank" rel="noopener">Open public site ↗</a>
+    </div>
+  </aside>
+
+  <main class="admin-main" id="main">
+
+    <section class="page" data-page="dashboard">
+      <header class="page-head">
+        <div><h2>Overview</h2><p class="muted">A quick look at what is happening on AmmaCare.</p></div>
+        <span class="section-index">Dashboard</span>
+      </header>
+      <div class="stat-grid" id="statGrid"></div>
+      <div class="card" id="recentCard"></div>
+    </section>
+
+    <section class="page" data-page="articles">
+      <header class="page-head">
+        <div><h2>Articles</h2><p class="muted">Add, edit and remove the guides people read.</p></div>
+        <span class="section-index">Content</span>
+      </header>
+      <div class="toolbar">
+        <input id="articleSearch" type="search" placeholder="Search articles" aria-label="Search articles">
+        <button class="btn btn-outline" id="seedArticlesBtn">Import from articles.json</button>
+        <button class="btn btn-primary" id="newArticleBtn">+ New article</button>
+      </div>
+      <div id="articleList"></div>
+    </section>
+
+    <section class="page" data-page="community">
+      <header class="page-head">
+        <div><h2>Community moderation</h2><p class="muted">Review posts and replies. Delete anything that breaks the guidelines.</p></div>
+        <span class="section-index">Moderation</span>
+      </header>
+      <div class="toolbar">
+        <input id="postSearch" type="search" placeholder="Search posts and replies" aria-label="Search posts">
+        <select id="postCategory" aria-label="Filter by category"></select>
+      </div>
+      <div id="postList"></div>
+    </section>
+
+    <section class="page" data-page="users">
+      <header class="page-head">
+        <div><h2>Users</h2><p class="muted">Everyone who has signed up on the main site.</p></div>
+        <span class="section-index">Accounts</span>
+      </header>
+      <div class="toolbar">
+        <input id="userSearch" type="search" placeholder="Search by name or email" aria-label="Search users">
+        <span class="muted" id="userCount"></span>
+      </div>
+      <div class="card"><div class="table-wrap"><table class="data-table" id="userTable"></table></div></div>
+    </section>
+
+    <section class="page" data-page="places">
+      <header class="page-head">
+        <div><h2>Places directory</h2><p class="muted">Where the symptom checker sends people, by specialty.</p></div>
+        <span class="section-index">Directory</span>
+      </header>
+      <div id="placesList"></div>
+    </section>
+
+    <section class="page" data-page="export">
+      <header class="page-head">
+        <div><h2>Export &amp; backup</h2><p class="muted">Download a JSON snapshot of users, posts and articles. Password hashes are not included.</p></div>
+        <span class="section-index">Data</span>
+      </header>
+      <div class="card">
+        <button class="btn btn-primary" id="exportBtn">Download backup (.json)</button>
+        <p class="muted" style="margin-top:1rem">Keep this in a safe place. It contains names and emails of your users.</p>
+      </div>
+    </section>
+
+    <section class="page" data-page="gate">
+      <div class="gate card">
+        <svg class="gate-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <span class="mono-label accent">Admins only</span>
+        <h3>Sign in to continue</h3>
+        <p>Use the email that an existing admin has added to the <code>admins</code> list, together with its Firebase Authentication password.</p>
+        <div class="gate-actions">
+          <button type="button" class="btn btn-primary" data-auth>Sign in</button>
+        </div>
+		</div>
+    </section>
+
+  </main>
+</div>
+
+<!-- =========== Article editor =========== -->
+<dialog id="articleDialog" class="editor-dialog">
+  <button class="dialog-close" type="button" aria-label="Close">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <form id="articleForm" class="editor-inner">
+    <span class="mono-label accent" id="articleDialogLabel">New article</span>
+    <h2 id="articleDialogTitle">Write a new article</h2>
+
+    <label class="field"><span class="mono-label">Title</span>
+      <input id="aTitle" required maxlength="160">
+    </label>
+	
+	  <label class="field"><span class="mono-label">Cover photo URL (optional)</span>
+  <input id="aImage" type="url" placeholder="https://example.com/photo.jpg">
+</label>
+
+    <div class="editor-grid">
+      <label class="field"><span class="mono-label">Category</span>
+        <select id="aCategory">
+          <option>Pregnancy</option><option>Toddlers</option>
+          <option>Food &amp; nutrition</option><option>My story</option>
+          <option>Question</option>
+        </select>
+      </label>
+      <label class="field"><span class="mono-label">Read time (mins)</span>
+        <input id="aReadMins" type="number" min="1" max="20" value="3">
+      </label>
+      <label class="field"><span class="mono-label">ID (optional)</span>
+        <input id="aId" placeholder="auto from title">
+      </label>
+    </div>
+
+    <label class="field"><span class="mono-label">Tags (comma separated)</span>
+      <input id="aTags" placeholder="iron, anaemia, green leaves">
+    </label>
+
+    <label class="field"><span class="mono-label">Summary (one sentence)</span>
+      <textarea id="aSummary" rows="2" maxlength="400"></textarea>
+    </label>
+
+    <label class="field"><span class="mono-label">Body (one paragraph per blank line)</span>
+      <textarea id="aBody" rows="12" required></textarea>
+    </label>
+
+    <div id="articleError"></div>
+
+    <div class="editor-actions">
+      <button type="button" class="btn btn-outline" id="articleCancel">Cancel</button>
+      <button type="submit" class="btn btn-primary" id="articleSave">Save article</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- =========== Auth dialog =========== -->
+<dialog id="authDialog" class="auth-dialog">
+  <button class="dialog-close" type="button" aria-label="Close">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <div class="auth-inner">
+    <svg class="brand-leaf large" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29c0-9 3-17 12-24-2 12-6 20-12 24Zm0 0C16 21 12 14 4 9c1 10 5 17 12 20Z"/></svg>
+    <h2 id="authTitle">Admin sign in</h2>
+    <form id="authForm" novalidate>
+      <label class="field"><span class="mono-label">Email</span>
+        <input id="authEmail" type="email" required autocomplete="email">
+      </label>
+      <label class="field"><span class="mono-label">Password</span>
+        <input id="authPassword" type="password" required minlength="8" autocomplete="current-password">
+      </label>
+      <div id="authError"></div>
+      <button class="btn btn-primary auth-submit" id="authSubmit" type="submit">Sign in</button>
+    </form>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
