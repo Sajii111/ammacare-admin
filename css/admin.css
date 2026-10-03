@@ -14,9 +14,27 @@
 * { box-sizing:border-box; }
 html, body { margin:0; padding:0; }
 body {
-  font-family:var(--sans); font-size:15px; line-height:1.55;
-  color:var(--ink); background:var(--cream-2); min-height:100vh;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--sage);
+  min-height: 100vh;
 }
+/* Same background picture as the main AmmaCare site */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg,
+      rgba(163, 177, 138, .80) 0%,
+      rgba(163, 177, 138, .90) 60%,
+      rgba(163, 177, 138, .96) 100%),
+    url('../images/background.jpg') center / cover no-repeat,
+    var(--sage);
+} 
 h1,h2,h3,h4 { font-family:var(--serif); font-weight:600; margin:0 0 .35em; letter-spacing:-.01em; }
 h2 { font-size:1.9rem; } h3 { font-size:1.25rem; }
 p { margin:0 0 1em; } a { color:var(--terracotta); text-decoration:none; }
