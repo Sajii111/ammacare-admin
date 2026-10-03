@@ -12,4 +12,4 @@ export const firebaseConfig = {
 };
 
 // Where "Open public site" points. Change when you deploy.
-export const PUBLIC_SITE_URL = "http://localhost:3000";
+export const PUBLIC_SITE_URL = "https://7gh5yhhp4f45-production-uiatwtnx.us-central1.suga.run/#home";
