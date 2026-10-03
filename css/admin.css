@@ -642,18 +642,6 @@ select:-webkit-autofill {
   border-color: var(--terracotta);
 }
 
-/* The X button in the Places page — make the glyph properly sized */
-.btn-danger.btn-small {
-  width: 34px;
-  min-width: 34px;
-  height: 34px;
-  padding: 0;
-  font-size: 18px;
-  line-height: 1;
-  font-weight: 500;
-  border-radius: 50%;
-}
-
 /* --- Alerts use variables now --- */
 .alert-error {
   background-color: var(--terracotta-soft);
@@ -773,15 +761,6 @@ select option {
   color: #fff;
 }
 
-/* X buttons in Places keep their circular shape */
-.btn-danger.btn-small {
-  background: transparent;
-  border-color: rgba(217, 110, 76, .55);
-}
-.btn-danger.btn-small:hover:not(:disabled) {
-  background: var(--terracotta-soft);
-}
-
 /* --- Header layout --- */
 .site-header .brand {
   margin-right: auto;
@@ -843,5 +822,41 @@ select option {
 /* The "Delete post" / "Delete" buttons in Articles, Community, Users */
 .actions .btn-danger.btn-small,
 .list-item .actions .btn-danger.btn-small {
+  white-space: nowrap;
+}
+
+/* =========================================================
+   Icon-only button (used for the × in the Places page)
+   ========================================================= */
+.btn-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid rgba(217, 110, 76, .55);
+  color: var(--terracotta);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.btn-icon:hover:not(:disabled) {
+  background: var(--terracotta-soft);
+  border-color: var(--terracotta);
+  color: #fff;
+}
+
+/* Make sure small text buttons never shrink */
+.btn-small {
+  padding: .4rem 1rem;
+  font-size: .85rem;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  border-radius: 999px;
   white-space: nowrap;
 }
