@@ -49,9 +49,9 @@ body {
   background-color: #A3B18A;
   background-image:
     linear-gradient(180deg,
-      rgba(163, 177, 138, .80) 0%,
-      rgba(163, 177, 138, .90) 60%,
-      rgba(163, 177, 138, .96) 100%),
+      rgba(163, 177, 138, .55) 0%,
+      rgba(163, 177, 138, .70) 60%,
+      rgba(163, 177, 138, .88) 100%),
     url('../images/background.jpg');
   background-position: center, center;
   background-size: cover, cover;
@@ -59,13 +59,14 @@ body {
   background-attachment: fixed, fixed;
   transition: color .4s ease;
 }
+
 [data-theme="dark"] body {
   background-color: #1a1f18;
   background-image:
     linear-gradient(180deg,
-      rgba(20, 26, 18, .90) 0%,
-      rgba(20, 26, 18, .94) 60%,
-      rgba(20, 26, 18, .98) 100%),
+      rgba(20, 26, 18, .55) 0%,
+      rgba(20, 26, 18, .72) 60%,
+      rgba(20, 26, 18, .88) 100%),
     url('../images/background.jpg');
 }
 
@@ -590,4 +591,156 @@ input, select, textarea, .btn, .pill, .tag,
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-new(root) { animation: none; }
   .theme-toggle svg, body { transition: none; }
+}
+
+/* =========================================================
+   Dark mode — readability fixes
+   ========================================================= */
+
+/* --- Inputs must follow the theme, not stay light --- */
+input, select, textarea {
+  background-color: var(--input-bg);
+  color: var(--ink);
+  border-color: var(--line);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(217, 110, 76, .25);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: .75;
+}
+input:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: var(--cream-2);
+  color: var(--muted);
+  opacity: .8;
+}
+
+/* Chrome/Safari autofill keeps its own colour — force ours */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 40px var(--input-bg) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* --- Buttons: replace hardcoded hex with variables so dark mode works --- */
+.btn-danger {
+  background-color: var(--cream);
+  color: var(--terracotta);
+  border-color: rgba(217, 110, 76, .45);
+}
+.btn-danger:hover {
+  background-color: var(--terracotta-soft);
+  border-color: var(--terracotta);
+}
+
+/* The X button in the Places page — make the glyph properly sized */
+.btn-danger.btn-small {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 500;
+  border-radius: 50%;
+}
+
+/* --- Alerts use variables now --- */
+.alert-error {
+  background-color: var(--terracotta-soft);
+  border-color: rgba(217, 110, 76, .5);
+  color: var(--ink);
+}
+.alert-success {
+  background-color: var(--forest-soft);
+  border-color: rgba(143, 179, 120, .5);
+  color: var(--ink);
+}
+
+/* --- Stat cards in dark: soften the pastel borders --- */
+[data-theme="dark"] .stat-card.accent-terracotta { border-color: rgba(217, 110, 76, .35); }
+[data-theme="dark"] .stat-card.accent-forest     { border-color: rgba(143, 179, 120, .35); }
+[data-theme="dark"] .stat-card.accent-mustard    { border-color: rgba(229, 184, 75, .35); }
+
+/* --- Table row hover on dark should be subtle, not a bright flash --- */
+[data-theme="dark"] .data-table tbody tr:hover { background-color: var(--cream-2); }
+
+/* --- The "Open public site" link and sidebar foot --- */
+[data-theme="dark"] .sidebar-foot { border-top-color: var(--line); }
+
+/* --- Card hover border on dark --- */
+[data-theme="dark"] .card:hover { border-color: rgba(217, 110, 76, .35); }
+
+/* =========================================================
+   Dark mode — toolbar inputs and dropdowns
+   ========================================================= */
+
+/* Toolbar search, email, text, and select */
+.toolbar input[type=search],
+.toolbar input[type=email],
+.toolbar input[type=text],
+.toolbar select {
+  background-color: var(--input-bg);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.toolbar input:focus,
+.toolbar select:focus {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(217, 110, 76, .25);
+}
+.toolbar input::placeholder {
+  color: var(--muted);
+  opacity: .75;
+}
+
+/* Native <option> list — browsers give it a light background by default.
+   These two lines tell it to follow the theme. */
+select option {
+  background-color: var(--input-bg);
+  color: var(--ink);
+}
+
+/* Also cover the standalone form selects (editor dialog) */
+.editor-inner select,
+.auth-inner select {
+  background-color: var(--input-bg);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.editor-inner select option,
+.auth-inner select option {
+  background-color: var(--input-bg);
+  color: var(--ink);
+}
+
+/* =========================================================
+   Selects: keep the native chevron, let the theme colour it
+   ========================================================= */
+
+/* Make sure the select follows the theme, but leave appearance alone
+   so the browser draws its own chevron — colour-scheme: dark handles it. */
+select,
+.toolbar select,
+.editor-inner select,
+.auth-inner select {
+  background-color: var(--input-bg);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+/* When the dropdown is open, the OS draws the option list.
+   These two lines tell it to use our theme colours for the items. */
+select option {
+  background-color: var(--input-bg);
+  color: var(--ink);
 }
