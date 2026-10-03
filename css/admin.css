@@ -860,3 +860,190 @@ select option {
   border-radius: 999px;
   white-space: nowrap;
 }
+
+/* =========================================================
+   Mobile polish
+   ========================================================= */
+
+/* --- Prevent iOS auto-zoom on focus --- */
+@media (max-width: 860px) {
+  input, select, textarea { font-size: 16px; }
+}
+
+/* --- Larger touch targets everywhere on small screens --- */
+@media (max-width: 860px) {
+  .btn           { min-height: 44px; padding: .7rem 1.3rem; }
+  .btn-small     { min-height: 38px; padding: .5rem 1rem; }
+  .btn-icon      { width: 40px; min-width: 40px; height: 40px; font-size: 20px; }
+  .admin-nav a   { min-height: 48px; padding: .8rem .9rem; }
+  .account-btn   { min-height: 40px; padding: .3rem 1rem .3rem .3rem; }
+  .theme-toggle  { width: 44px; height: 44px; }
+  .pill          { min-height: 38px; padding: .5rem 1.1rem; }
+  .chip          { min-height: 34px; padding: .45rem 1rem; }
+}
+
+/* --- Header: tighter but still readable --- */
+@media (max-width: 640px) {
+  .site-header { padding: .6rem 1rem; gap: .5rem; }
+  .brand { font-size: 1.15rem; }
+  .brand-leaf { width: 22px; height: 22px; }
+  .admin-tag { display: none; }
+  .account-btn span:not(.avatar) { display: none; }
+  .account-btn { padding: .25rem; }
+}
+
+/* --- Toolbar: stack neatly, don't cramp --- */
+@media (max-width: 640px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .6rem;
+  }
+  .toolbar input[type=search],
+  .toolbar input[type=email],
+  .toolbar input[type=text],
+  .toolbar select {
+    min-width: 0;
+    width: 100%;
+  }
+  .toolbar .btn { width: 100%; }
+}
+
+/* --- Cards: less padding so content is bigger --- */
+@media (max-width: 640px) {
+  .card,
+  .stat-card {
+    padding: 1.1rem 1.2rem;
+    border-radius: 18px;
+  }
+  .stat-card strong { font-size: 1.8rem; }
+  .admin-main { padding: 1.4rem 1rem 3rem; }
+}
+
+/* --- Page head: left-align and stack the label --- */
+@media (max-width: 640px) {
+  .page-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .3rem;
+  }
+  .page-head h2 { font-size: 1.55rem; }
+  .section-index { order: -1; }
+}
+
+/* --- List items: stack the actions under the content --- */
+@media (max-width: 640px) {
+  .list-item {
+    flex-direction: column;
+    gap: .7rem;
+  }
+  .list-item .actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .list-item .actions .btn { flex: 1; }
+}
+
+/* --- Table rows: horizontal scroll with a visual hint --- */
+@media (max-width: 640px) {
+  .table-wrap {
+    position: relative;
+    margin: 0 -.5rem;
+    padding: 0 .5rem;
+  }
+  .table-wrap::after {
+    content: "swipe to see more →";
+    position: absolute;
+    right: .8rem;
+    bottom: -1.6rem;
+    font-family: var(--mono);
+    font-size: .68rem;
+    color: var(--muted);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    pointer-events: none;
+    animation: hintFade 3s ease-out forwards;
+  }
+  @keyframes hintFade {
+    0%, 60% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  .data-table th, .data-table td { padding: .65rem .7rem; font-size: .88rem; }
+}
+
+/* --- Editor dialog goes full-screen on mobile --- */
+@media (max-width: 640px) {
+  dialog.editor-dialog {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+  }
+  .editor-inner { padding: 1.2rem; }
+  .editor-grid { grid-template-columns: 1fr; }
+  .editor-actions {
+    position: sticky;
+    bottom: 0;
+    background: var(--cream);
+    padding: .8rem 0;
+    margin-top: 1.2rem;
+    border-top: 1px solid var(--line);
+    z-index: 1;
+  }
+  .editor-actions .btn { flex: 1; }
+  .dialog-close { top: 10px; right: 10px; width: 42px; height: 42px; }
+}
+
+/* --- Auth dialog: fills the bottom of the screen --- */
+@media (max-width: 640px) {
+  .auth-dialog {
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    border-radius: 20px 20px 0 0;
+    top: auto;
+    bottom: 0;
+    position: fixed;
+    max-height: 90vh;
+  }
+  .auth-inner { padding: 1.6rem 1.4rem calc(1.4rem + env(safe-area-inset-bottom)); }
+}
+
+/* --- Places editor: stack the input rows --- */
+@media (max-width: 640px) {
+  .editor-grid[style*="grid-template-columns:2fr"] {
+    grid-template-columns: 1fr !important;
+    gap: .5rem !important;
+  }
+  .editor-grid[style*="grid-template-columns:2fr"] .btn-icon {
+    justify-self: flex-end;
+  }
+}
+
+/* --- Toast: full-width pill on small screens --- */
+@media (max-width: 640px) {
+  .toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    transform: translateY(20px);
+    text-align: center;
+  }
+  .toast.on { transform: none; }
+}
+
+/* --- Reduce animation intensity on mobile --- */
+@media (max-width: 640px) {
+  .page.active > * { animation-delay: 0s !important; }
+  .list-item { animation-delay: 0s !important; }
+}
+
+/* --- Safe area for notched phones --- */
+@supports (padding: max(0px)) {
+  .site-header { padding-top: max(.6rem, env(safe-area-inset-top)); }
+  body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+}
