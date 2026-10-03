@@ -57,7 +57,7 @@ function render() {
           <input data-i="${i}" data-f="name"   value="${esc(p.name || '')}"   placeholder="Name">
           <input data-i="${i}" data-f="detail" value="${esc(p.detail || '')}" placeholder="Detail">
           <input data-i="${i}" data-f="place"  value="${esc(p.place || '')}"  placeholder="Place">
-          <button class="btn btn-danger btn-small" data-del="${i}">×</button>
+          <button class="btn btn-icon" data-del="${i}" aria-label="Remove place">×</button>
         </div>`).join('') || '<p class="muted" style="margin:.3rem 0">No places yet.</p>';
       box.querySelectorAll('input[data-i]').forEach(inp => inp.addEventListener('input', () => {
         data.places[key][Number(inp.dataset.i)][inp.dataset.f] = inp.value;
