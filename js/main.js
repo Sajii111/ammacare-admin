@@ -8,6 +8,7 @@ import { initCommunity } from './pages/community.js';
 import { initUsers } from './pages/users.js';
 import { initPlaces } from './pages/places.js';
 import { initExport } from './pages/export.js';
+import { initTheme } from './theme.js';
 
 const PAGES = {
   dashboard: initDashboard,
@@ -73,6 +74,8 @@ function openAuth() {
   if (!d.open) d.showModal();
   setTimeout(() => $('#authEmail').focus(), 50);
 }
+
+initTheme();
 
 /* ---------- events ---------- */
 function wireGlobalEvents() {
